@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { UserContext } from '../context/UserContext';
 
 const Preloader = () => {
+  const { user } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -31,18 +33,18 @@ const Preloader = () => {
             className="relative text-5xl md:text-7xl font-black tracking-tighter"
           >
             {/* Background text (empty state) */}
-            <div className="text-red-900/30">
-              Leeshark<span className="text-red-900/30">.</span>
+            <div className="text-red-900/30 capitalize">
+              {user?.name || 'Harish'}<span className="text-red-900/30">.</span>
             </div>
 
             {/* Foreground text (water fill state) */}
             <motion.div 
-              className="absolute top-0 left-0 text-white overflow-hidden whitespace-nowrap"
+              className="absolute top-0 left-0 text-white overflow-hidden whitespace-nowrap capitalize"
               initial={{ clipPath: 'inset(100% 0 0 0)' }}
               animate={{ clipPath: 'inset(0% 0 0 0)' }}
               transition={{ duration: 1.6, ease: "easeInOut", delay: 0.2 }}
             >
-              Leeshark<span className="text-black">.</span>
+              {user?.name || 'Harish'}<span className="text-black">.</span>
             </motion.div>
           </motion.div>
 
